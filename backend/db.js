@@ -28,7 +28,8 @@ export async function initDb() {
       titulo TEXT NOT NULL,
       resumen TEXT NOT NULL,
       etiqueta TEXT,
-      fecha TEXT
+      fecha TEXT,
+      imagen TEXT
     );
 
     CREATE TABLE IF NOT EXISTS opiniones (
@@ -64,7 +65,13 @@ export async function initDb() {
     );
   `);
 
- 
+  // Migración: agregar columna imagen si no existe (para bases de datos ya creadas)
+  try {
+    await db.exec('ALTER TABLE noticias ADD COLUMN imagen TEXT');
+  } catch (e) {
+    // La columna ya existe, ignorar el error
+  }
+
   
   const count = await db.get('SELECT COUNT(*) as count FROM usuarios');
   if (count.count === 0) {

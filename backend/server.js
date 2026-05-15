@@ -2,9 +2,26 @@ import express from 'express';
 import cors from 'cors';
 import dbPromise, { initDb } from './db.js';
 
+import multer from 'multer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const uploadsDir = path.join(__dirname, 'uploads');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadsDir),
+  filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
+});
+
+const upload = multer({ storage });
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Initialize Database
 initDb().then(() => {
@@ -20,15 +37,16 @@ app.get('/api/news', async (req, res) => {
   res.json(news.map(n => ({ ...n, title: n.titulo, summary: n.resumen, tag: n.etiqueta, date: n.fecha })));
 });
 
-app.post('/api/news', async (req, res) => {
+app.post('/api/news', upload.single('imagen'), async (req, res) => {
   const db = await dbPromise;
   const { title, summary, tag, date } = req.body;
+  const imagen = req.file ? '/uploads/' + req.file.filename : null;
   const result = await db.run(
-    'INSERT INTO noticias (titulo, resumen, etiqueta, fecha) VALUES (?, ?, ?, ?)',
-    [title, summary, tag, date]
+    'INSERT INTO noticias (titulo, resumen, etiqueta, fecha, imagen) VALUES (?, ?, ?, ?, ?)',
+    [title, summary, tag || 'General', date || 'Justo ahora', imagen]
   );
   const newPost = await db.get('SELECT * FROM noticias WHERE id = ?', result.lastID);
-  res.status(201).json({ ...newPost, title: newPost.titulo, summary: newPost.resumen, tag: newPost.etiqueta, date: newPost.fecha });
+  res.status(201).json({ ...newPost, title: newPost.titulo, summary: newPost.resumen, tag: newPost.etiqueta, date: newPost.fecha, imagen: newPost.imagen });
 });
 
 app.delete('/api/news/:id', async (req, res) => {
@@ -96,7 +114,7 @@ app.post('/api/login', async (req, res) => {
   const db = await dbPromise;
   const { email, password } = req.body;
   const user = await db.get('SELECT * FROM usuarios WHERE email = ? AND password = ?', [email, password]);
-  
+
   if (user) {
     if (user.activo === 0) return res.status(403).json({ message: 'Usuario bloqueado' });
     user.activo = true;
@@ -109,7 +127,7 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/users', async (req, res) => {
   const db = await dbPromise;
   const { nombre, email, password, rol } = req.body;
-  
+
   try {
     const result = await db.run(
       'INSERT INTO usuarios (nombre, email, password, rol, activo) VALUES (?, ?, ?, ?, 1)',
@@ -130,15 +148,15 @@ app.put('/api/users/:id', async (req, res) => {
   const db = await dbPromise;
   const id = parseInt(req.params.id);
   const { activo, password } = req.body;
-  
+
   if (activo !== undefined) {
     await db.run('UPDATE usuarios SET activo = ? WHERE id = ?', [activo ? 1 : 0, id]);
   }
-  
+
   if (password !== undefined) {
     await db.run('UPDATE usuarios SET password = ? WHERE id = ?', [password, id]);
   }
-  
+
   const user = await db.get('SELECT * FROM usuarios WHERE id = ?', id);
   if (user) {
     user.activo = user.activo === 1;
@@ -163,17 +181,17 @@ app.listen(PORT, () => {
 // Ruta para procesar la Solicitud de Inscripción
 app.post('/api/inscripciones', async (req, res) => {
   const db = await dbPromise;
-  
+
   // IMPORTANTE: Estos nombres deben coincidir EXACTAMENTE con el "name" 
   // de tus inputs en el formulario de React (archivo Registration.jsx)
-  const { 
-    nombreAspirante, 
-    apellidoAspirante, 
-    nivel, 
-    nombreTutor, 
-    apellidoTutor, 
-    email, 
-    telefono 
+  const {
+    nombreAspirante,
+    apellidoAspirante,
+    nivel,
+    nombreTutor,
+    apellidoTutor,
+    email,
+    telefono
   } = req.body;
 
   try {
@@ -188,20 +206,20 @@ app.post('/api/inscripciones', async (req, res) => {
         telefono_contacto
       ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
-        nombreAspirante, 
-        apellidoAspirante, 
-        nivel, 
-        nombreTutor, 
-        apellidoTutor, 
-        email, 
+        nombreAspirante,
+        apellidoAspirante,
+        nivel,
+        nombreTutor,
+        apellidoTutor,
+        email,
         telefono
       ]
     );
 
     // Seguimos la misma estructura que tu ruta de jobs
-    res.status(201).json({ 
-      id: result.lastID, 
-      message: 'Solicitud de inscripción enviada correctamente' 
+    res.status(201).json({
+      id: result.lastID,
+      message: 'Solicitud de inscripción enviada correctamente'
     });
 
   } catch (err) {
