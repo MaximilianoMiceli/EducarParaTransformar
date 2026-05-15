@@ -64,7 +64,8 @@ export async function initDb() {
     );
   `);
 
-  // Migrar datos de data.json a SQLite si la base de datos está vacía
+ 
+  
   const count = await db.get('SELECT COUNT(*) as count FROM usuarios');
   if (count.count === 0) {
     await db.exec(`
