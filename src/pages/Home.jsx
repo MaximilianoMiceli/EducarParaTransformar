@@ -15,7 +15,9 @@ export default function Home() {
     <div>
       {/* Hero Section */}
       <section className="hero" style={{
-        backgroundColor: 'var(--color-primary)',
+        backgroundImage: 'linear-gradient(rgba(10, 37, 64, 0.8), rgba(10, 37, 64, 0.9)), url("/fondo.jpg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         color: 'white',
         padding: '120px 0',
         textAlign: 'center'
