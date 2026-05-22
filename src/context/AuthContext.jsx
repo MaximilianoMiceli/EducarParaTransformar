@@ -5,7 +5,11 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem('user');
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+
 
   const login = async (email, password) => {
     try {
@@ -14,11 +18,20 @@ export const AuthProvider = ({ children }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
       });
-      
+
       if (response.ok) {
         const data = await response.json();
-        setUser({ id: data.id, name: data.nombre, role: data.rol, email: data.email });
+        const loggedUser = {
+          id:
+            data.id, name: data.nombre, role:
+            data.rol, email: data.email
+        };
+
+        setUser(loggedUser);
+
+        localStorage.setItem('user', JSON.stringify(loggedUser));
         return true;
+
       } else {
         const errData = await response.json();
         throw new Error(errData.message || 'Credenciales inválidas');
@@ -31,12 +44,20 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = (userData) => {
-    // Simulated register logic
-    setUser({ id: 4, name: userData.nombre, role: userData.rol, email: userData.email });
+    const newUser = {
+      id: 4, name:
+        userData.nombre, role:
+        userData.rol, email: userData.email
+    };
+
+    setUser(newUser);
+    localStorage.setItem('user', JSON.stringify(newUser));
   };
 
   const logout = () => {
     setUser(null);
+
+    localStorage.removeItem('user');
   };
 
   return (
