@@ -1,14 +1,22 @@
-import { ArrowRight, Star, Heart, BookOpen } from 'lucide-react';
+import { ArrowRight, Star, Heart, BookOpen, Image } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Reviews from '../components/Reviews';
 
 export default function Home() {
+  const [noticias, setNoticias] = useState([]); //Se crea el estado (useState) para las noticias 
+  useEffect(() => { //Se cargan las noticias desde el servidor
+    fetch('http://localhost:3001/api/news')
+      .then(res => res.json())
+      .then(data => setNoticias(data))
+      .catch(err => console.error('Error al traer noticias:', err));
+  }, []);
   return (
     <div>
       {/* Hero Section */}
-      <section className="hero" style={{ 
-        backgroundColor: 'var(--color-primary)', 
-        color: 'white', 
+      <section className="hero" style={{
+        backgroundColor: 'var(--color-primary)',
+        color: 'white',
         padding: '120px 0',
         textAlign: 'center'
       }}>
@@ -31,41 +39,42 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Galería (Simulada con cards temporales) */}
+      {/* Sección de noticias */}
       <section className="section bg-light">
         <div className="container">
-          <h2 className="section-title">Nuestra Vida Escolar</h2>
+          <h2 className="section-title">Últimas Noticias</h2>
           <div className="grid-3">
-            <div className="card">
-              <div style={{ height: '200px', backgroundColor: '#CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: '#64748B' }}>[Imagen]</span>
+            {noticias.slice(0, 3).map((item) => (
+              <div key={item.id} className="card">
+                {/* Imagen de la noticia o un placeholder si no tiene */}
+                {item.imagen ? (
+                  <img
+                    src={`http://localhost:3001${item.imagen}`}
+                    alt={item.title}
+                    style={{ height: '200px', width: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <div style={{ height: '200px', backgroundColor: '#E2E8F0', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Image size={36} color="#94A3B8" />
+                  </div>
+                )}
+
+                <div className="card-body">
+                  <span style={{ fontSize: '0.85rem', color: 'var(--color-accent-orange)', fontWeight: 'bold' }}>
+                    {item.tag} • {item.date}
+                  </span>
+                  <h3 style={{ margin: '8px 0' }}>{item.title}</h3>
+                  <p style={{ color: 'var(--color-text-muted)', marginBottom: '16px' }}>{item.summary}</p>
+                  <Link to="/noticias" style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}>
+                    Leer más →
+                  </Link>
+                </div>
               </div>
-              <div className="card-body">
-                <h3 style={{ marginBottom: '8px' }}>Comunidad Unida</h3>
-                <p>Fomentamos el compañerismo y los valores.</p>
-              </div>
-            </div>
-            <div className="card">
-              <div style={{ height: '200px', backgroundColor: '#CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: '#64748B' }}>[Imagen]</span>
-              </div>
-              <div className="card-body">
-                <h3 style={{ marginBottom: '8px' }}>Excelencia Académica</h3>
-                <p>Instalaciones de primer nivel para potenciar el aprendizaje.</p>
-              </div>
-            </div>
-            <div className="card">
-              <div style={{ height: '200px', backgroundColor: '#CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <span style={{ color: '#64748B' }}>[Imagen]</span>
-              </div>
-              <div className="card-body">
-                <h3 style={{ marginBottom: '8px' }}>Deporte y Bienestar</h3>
-                <p>Desarrollo físico e integral de cada estudiante.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
+
 
       {/* Valores */}
       <section className="section" style={{ backgroundColor: 'white' }}>
