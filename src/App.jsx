@@ -5,6 +5,7 @@ import About from './pages/About';
 import Levels from './pages/Levels';
 import Wellbeing from './pages/Wellbeing';
 import News from './pages/News';
+import NewsDetail from './pages/NewsDetail';
 import Registration from './pages/Registration';
 import Jobs from './pages/Jobs';
 import Login from './pages/Login';
@@ -21,6 +22,7 @@ function App() {
           <Route path="niveles" element={<Levels />} />
           <Route path="bienestar" element={<Wellbeing />} />
           <Route path="noticias" element={<News />} />
+          <Route path="noticias/:id" element={<NewsDetail />} />
           <Route path="inscripcion" element={<Registration />} />
           <Route path="empleo" element={<Jobs />} />
           <Route path="acceso" element={<Login />} />

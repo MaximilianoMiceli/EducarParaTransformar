@@ -27,6 +27,7 @@ export async function initDb() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       titulo TEXT NOT NULL,
       resumen TEXT NOT NULL,
+      contenido TEXT,
       etiqueta TEXT,
       fecha TEXT,
       imagen TEXT
@@ -63,11 +64,29 @@ export async function initDb() {
         estado TEXT DEFAULT 'pendiente',
         fecha_solicitud TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS eventos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      titulo TEXT NOT NULL,
+      descripcion TEXT NOT NULL,
+      dia TEXT NOT NULL,
+      mes TEXT NOT NULL,
+      hora TEXT NOT NULL,
+      lugar TEXT NOT NULL,
+      tag TEXT NOT NULL
+    );
   `);
 
   // Migración: agregar columna imagen si no existe (para bases de datos ya creadas)
   try {
     await db.exec('ALTER TABLE noticias ADD COLUMN imagen TEXT');
+  } catch (e) {
+    // La columna ya existe, ignorar el error
+  }
+
+  // Migración: agregar columna contenido si no existe
+  try {
+    await db.exec('ALTER TABLE noticias ADD COLUMN contenido TEXT');
   } catch (e) {
     // La columna ya existe, ignorar el error
   }
@@ -93,6 +112,16 @@ export async function initDb() {
       INSERT INTO opiniones (autor, texto, fecha) VALUES 
       ('María P.', 'Excelente nivel académico y calidez humana. Mis hijos están felices.', 'Hace 2 días'),
       ('Carlos R.', 'Las instalaciones son de primer nivel. Recomiendo mucho el colegio.', 'Hace 1 semana');
+    `);
+  }
+
+  const countEvents = await db.get('SELECT COUNT(*) as count FROM eventos');
+  if (countEvents.count === 0) {
+    await db.exec(`
+      INSERT INTO eventos (titulo, descripcion, dia, mes, hora, lugar, tag) VALUES
+      ('Feria de Ciencias 2026', 'Una jornada interactiva donde los estudiantes presentarán sus proyectos de robótica, ecología y experimentos prácticos.', '12', 'Jun', '09:00 - 16:00 hs', 'Salón de Actos Principal', 'Institucional'),
+      ('Jornada Deportiva Intercolegial', 'Competencias de fútbol, voley y atletismo entre colegios de la región en nuestras canchas deportivas.', '18', 'Jun', '08:30 - 13:00 hs', 'Campo de Deportes', 'Deportes'),
+      ('Reunión Informativa: Admisiones 2027', 'Charla abierta para futuros ingresantes donde se explicarán los planes de estudio y se hará un recorrido.', '03', 'Jul', '18:00 - 19:30 hs', 'Biblioteca Escolar', 'Familias');
     `);
   }
 }

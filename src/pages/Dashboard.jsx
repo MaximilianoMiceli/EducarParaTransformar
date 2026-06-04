@@ -2,6 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import UserManagement from '../components/UserManagement';
+import EventManager from '../components/EventManager';
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -56,6 +57,7 @@ useEffect(() => {
       )}
 
       {user.role === 'autoridad' && <UserManagement />}
+      {user.role === 'autoridad' && <EventManager />}
 
       {user.role === 'docente' && (
         <div className="grid-2">
@@ -105,6 +107,7 @@ useEffect(() => {
       )}
 
       {user.role === 'docente' && <UserManagement />}
+      {user.role === 'docente' && <EventManager />}
 
       {(user.role === 'padre' || user.role === 'alumno') && (
         <div className="card">

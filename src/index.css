@@ -165,7 +165,7 @@ a {
 
 /* Navigation */
 .navbar {
-  background-color: var(--color-bg-white);
+  background: linear-gradient(135deg, #047857 0%, #064e3b 100%);
   box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
@@ -177,6 +177,10 @@ a {
   justify-content: space-between;
   align-items: center;
   height: 80px;
+}
+
+.navbar .logo {
+  color: white;
 }
 
 .logo {
@@ -195,6 +199,19 @@ a {
   align-items: center;
 }
 
+.navbar .nav-link {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar .nav-link:hover, .navbar .nav-link.active {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
 .nav-link {
   font-weight: 500;
   color: var(--color-text-main);
@@ -206,7 +223,7 @@ a {
 
 /* Footer */
 .footer {
-  background-color: var(--color-primary-dark);
+  background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
   color: white;
   padding: 64px 0 32px;
 }

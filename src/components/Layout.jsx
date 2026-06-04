@@ -26,9 +26,13 @@ export default function Layout() {
     <div className="app-container">
       <nav className="navbar">
         <div className="container navbar-container">
-          <Link to="/" className="logo">
-            <img src="/favicon.png" alt="Logo" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
-            Educar para Transformar
+          <Link to="/" className="logo" style={{ marginLeft: '-35px' }}>
+            <img src="/favicon.png" alt="Logo" style={{ width: '56px', height: '56px', objectFit: 'contain', backgroundColor: 'white', borderRadius: '50%', padding: '4px' }} />
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', textShadow: '1px 1px 2px #000' }}>
+              <span style={{ color: '#3B82F6' }}>Educar</span>
+              <span style={{ color: '#EC4899', fontWeight: '600' }}>para</span>
+              <span style={{ color: '#FBBF24' }}>Transformar</span>
+            </span>
           </Link>
           <div className="nav-links">
             {links.map((link) => (
@@ -66,9 +70,13 @@ export default function Layout() {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <div className="logo" style={{ color: 'white', marginBottom: '16px' }}>
-                <img src="/favicon.png" alt="Logo" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
-                Educar para Transformar
+              <div className="logo" style={{ marginBottom: '16px', marginLeft: '-30px' }}>
+                <img src="/favicon.png" alt="Logo" style={{ width: '56px', height: '56px', objectFit: 'contain', backgroundColor: 'white', borderRadius: '50%', padding: '4px' }} />
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', textShadow: '1px 1px 2px #000' }}>
+                  <span style={{ color: '#3B82F6' }}>Educar</span>
+                  <span style={{ color: '#EC4899', fontWeight: '600' }}>para</span>
+                  <span style={{ color: '#FBBF24' }}>Transformar</span>
+                </span>
               </div>
               <p style={{ color: 'rgba(255,255,255,0.8)' }}>
                 Inspiramos, desafiamos y empoderamos a todos nuestros alumnos para que alcancen su máximo potencial.
