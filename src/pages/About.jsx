@@ -22,8 +22,8 @@ export default function About() {
                 pueda descubrir y desarrollar sus talentos únicos.
               </p>
             </div>
-            <div style={{ backgroundColor: '#E2E8F0', height: '400px', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               <span style={{ color: '#64748B' }}>[Imagen: Biblioteca escolar]</span>
+            <div style={{ height: '400px', borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
+              <img src="/bibliotecaescolar.png" alt="Biblioteca escolar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </div>
         </div>
