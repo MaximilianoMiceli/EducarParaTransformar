@@ -32,11 +32,11 @@ export default function Register() {
             <div className="grid-2" style={{ gap: '16px', marginBottom: '16px' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label">Nombre</label>
-                <input required type="text" className="form-input" onChange={e => setFormData({...formData, nombre: e.target.value})} />
+                <input required type="text" className="form-input" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" onChange={e => setFormData({...formData, nombre: e.target.value})} />
               </div>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label className="form-label">Apellido</label>
-                <input required type="text" className="form-input" onChange={e => setFormData({...formData, apellido: e.target.value})} />
+                <input required type="text" className="form-input" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" onChange={e => setFormData({...formData, apellido: e.target.value})} />
               </div>
             </div>
 
