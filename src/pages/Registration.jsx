@@ -122,7 +122,7 @@ export default function Registration() {
                     </div>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label className="form-label">Teléfono</label>
-                      <input required type="tel" name="telefono" className="form-input" onChange={handleChange} />
+                      <input required type="tel" name="telefono" className="form-input" pattern="[0-9]+" title="Solo se permiten números" onChange={handleChange} />
                     </div>
                   </div>
 
