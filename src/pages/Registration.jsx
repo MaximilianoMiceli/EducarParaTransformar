@@ -4,9 +4,11 @@ export default function Registration() {
   const [formData, setFormData] = useState({
     nombreAspirante: '',
     apellidoAspirante: '',
+    dniAspirante: '',
     nivel: 'inicial',
     nombreTutor: '',
     apellidoTutor: '',
+    dniTutor: '',
     email: '',
     telefono: ''
   });
@@ -34,9 +36,11 @@ export default function Registration() {
       setFormData({
         nombreAspirante: '',
         apellidoAspirante: '',
+        dniAspirante: '',
         nivel: 'inicial',
         nombreTutor: '',
         apellidoTutor: '',
+        dniTutor: '',
         email: '',
         telefono: ''
       });
@@ -84,6 +88,10 @@ export default function Registration() {
                     </div>
                   </div>
                   <div className="form-group">
+                    <label className="form-label">DNI del Aspirante</label>
+                    <input required type="text" name="dniAspirante" className="form-input" pattern="[0-9]{7,8}" title="Ingrese entre 7 y 8 dígitos numéricos" onChange={handleChange} />
+                  </div>
+                  <div className="form-group">
                     <label className="form-label">Nivel Educativo al que aplica</label>
                     <select name="nivel" className="form-select" onChange={handleChange}>
                       <option value="inicial">Nivel Inicial</option>
@@ -102,6 +110,10 @@ export default function Registration() {
                       <label className="form-label">Apellido</label>
                       <input required type="text" name="apellidoTutor" className="form-input" onChange={handleChange} />
                     </div>
+                  </div>
+                  <div className="form-group">
+                    <label className="form-label">DNI del Tutor</label>
+                    <input required type="text" name="dniTutor" className="form-input" pattern="[0-9]{7,8}" title="Ingrese entre 7 y 8 dígitos numéricos" onChange={handleChange} />
                   </div>
                   <div className="grid-2" style={{ gap: '16px', marginBottom: '32px' }}>
                     <div className="form-group" style={{ marginBottom: 0 }}>

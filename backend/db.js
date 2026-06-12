@@ -91,7 +91,12 @@ export async function initDb() {
     // La columna ya existe, ignorar el error
   }
 
-  
+  try { await db.exec('ALTER TABLE inscripciones ADD COLUMN dni_aspirante TEXT'); } catch(e) {}
+  try { await db.exec('ALTER TABLE inscripciones ADD COLUMN dni_tutor TEXT'); } catch(e) {}
+  try { await db.exec("UPDATE noticias SET imagen = '/uploads/Feriadeciencias.png' WHERE titulo LIKE '%Feria de Ciencias%' AND imagen IS NULL"); } catch(e) {}
+  try { await db.exec("UPDATE noticias SET imagen = '/uploads/pistadeatletismo.png' WHERE titulo LIKE '%pista de atletismo%' AND imagen IS NULL"); } catch(e) {}
+
+
   const count = await db.get('SELECT COUNT(*) as count FROM usuarios');
   if (count.count === 0) {
     await db.exec(`
@@ -103,9 +108,9 @@ export async function initDb() {
     `);
     
     await db.exec(`
-      INSERT INTO noticias (titulo, resumen, etiqueta, fecha) VALUES 
-      ('Feria de Ciencias 2026: Un éxito rotundo', 'Nuestros alumnos de secundaria presentaron proyectos innovadores en robótica y sustentabilidad.', 'Secundaria', '05 May 2026'),
-      ('Inauguración de la nueva pista de atletismo', 'Seguimos mejorando nuestras instalaciones deportivas para el bienestar de nuestros estudiantes.', 'Deportes', '28 Abr 2026');
+      INSERT INTO noticias (titulo, resumen, etiqueta, fecha, imagen) VALUES
+      ('Feria de Ciencias 2026: Un éxito rotundo', 'Nuestros alumnos de secundaria presentaron proyectos innovadores en robótica y sustentabilidad.', 'Secundaria', '05 May 2026', '/uploads/Feriadeciencias.png'),
+      ('Inauguración de la nueva pista de atletismo', 'Seguimos mejorando nuestras instalaciones deportivas para el bienestar de nuestros estudiantes.', 'Deportes', '28 Abr 2026', '/uploads/pistadeatletismo.png');
     `);
 
     await db.exec(`

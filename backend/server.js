@@ -259,9 +259,11 @@ app.post('/api/inscripciones', async (req, res) => {
   const {
     nombreAspirante,
     apellidoAspirante,
+    dniAspirante,
     nivel,
     nombreTutor,
     apellidoTutor,
+    dniTutor,
     email,
     telefono
   } = req.body;
@@ -269,20 +271,24 @@ app.post('/api/inscripciones', async (req, res) => {
   try {
     const result = await db.run(
       `INSERT INTO inscripciones (
-        nombre_aspirante, 
-        apellido_aspirante, 
-        nivel, 
-        nombre_tutor, 
-        apellido_tutor, 
-        email_contacto, 
+        nombre_aspirante,
+        apellido_aspirante,
+        dni_aspirante,
+        nivel,
+        nombre_tutor,
+        apellido_tutor,
+        dni_tutor,
+        email_contacto,
         telefono_contacto
-      ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         nombreAspirante,
         apellidoAspirante,
+        dniAspirante,
         nivel,
         nombreTutor,
         apellidoTutor,
+        dniTutor,
         email,
         telefono
       ]
