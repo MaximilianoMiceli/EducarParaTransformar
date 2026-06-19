@@ -91,7 +91,7 @@ export default function UserManagement() {
             <h4 style={{ marginBottom: '16px' }}>Crear Nuevo Usuario</h4>
             <div className="grid-2" style={{ gap: '16px', marginBottom: '16px' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
-                <input required type="text" className="form-input" placeholder="Nombre completo" value={newUser.nombre} onChange={e => setNewUser({...newUser, nombre: e.target.value})} />
+                <input required type="text" className="form-input" placeholder="Nombre completo" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" value={newUser.nombre} onChange={e => setNewUser({...newUser, nombre: e.target.value})} />
               </div>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <input required type="email" className="form-input" placeholder="Correo electrónico" value={newUser.email} onChange={e => setNewUser({...newUser, email: e.target.value})} />

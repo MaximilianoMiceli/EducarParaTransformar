@@ -105,7 +105,7 @@ export default function EventManager() {
           <div className="grid-2" style={{ gap: '16px', marginBottom: '16px' }}>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label" style={{ fontSize: '0.85rem' }}>Título del Evento</label>
-              <input required type="text" className="form-input" placeholder="Ej: Feria de Ciencias" value={newEvent.titulo} onChange={e => setNewEvent({...newEvent, titulo: e.target.value})} />
+              <input required type="text" className="form-input" placeholder="Ej: Feria de Ciencias" pattern=".*[A-Za-zÀ-ÿ].*" title="El título debe contener al menos una letra" value={newEvent.titulo} onChange={e => setNewEvent({...newEvent, titulo: e.target.value})} />
             </div>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label" style={{ fontSize: '0.85rem' }}>Tema / Categoría</label>
@@ -142,13 +142,13 @@ export default function EventManager() {
             </div>
             <div className="form-group" style={{ marginBottom: 0 }}>
               <label className="form-label" style={{ fontSize: '0.85rem' }}>Hora / Horario (Ej: 09:00 - 15:00 hs)</label>
-              <input required type="text" className="form-input" placeholder="Horario" value={newEvent.hora} onChange={e => setNewEvent({...newEvent, hora: e.target.value})} />
+              <input required type="text" className="form-input" placeholder="Horario" pattern="([01][0-9]|2[0-3]):[0-5][0-9].*" title="Debe comenzar con formato HH:MM válido (ej: 09:00)" value={newEvent.hora} onChange={e => setNewEvent({...newEvent, hora: e.target.value})} />
             </div>
           </div>
 
           <div className="form-group" style={{ marginBottom: '16px' }}>
             <label className="form-label" style={{ fontSize: '0.85rem' }}>Lugar o Ubicación (Ej: Salón de Actos Principal)</label>
-            <input required type="text" className="form-input" placeholder="Lugar del evento" value={newEvent.lugar} onChange={e => setNewEvent({...newEvent, lugar: e.target.value})} />
+            <input required type="text" className="form-input" placeholder="Lugar del evento" pattern=".*[A-Za-zÀ-ÿ].*" title="El lugar debe contener al menos una letra" value={newEvent.lugar} onChange={e => setNewEvent({...newEvent, lugar: e.target.value})} />
           </div>
 
           <div className="form-group" style={{ marginBottom: '20px' }}>
