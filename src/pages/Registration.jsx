@@ -80,11 +80,11 @@ export default function Registration() {
                   <div className="grid-2" style={{ gap: '16px', marginBottom: '24px' }}>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label className="form-label">Nombre</label>
-                      <input required type="text" name="nombreAspirante" className="form-input" onChange={handleChange} />
+                      <input required type="text" name="nombreAspirante" className="form-input" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" onChange={handleChange} />
                     </div>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label className="form-label">Apellido</label>
-                      <input required type="text" name="apellidoAspirante" className="form-input" onChange={handleChange} />
+                      <input required type="text" name="apellidoAspirante" className="form-input" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" onChange={handleChange} />
                     </div>
                   </div>
                   <div className="form-group">
@@ -104,11 +104,11 @@ export default function Registration() {
                   <div className="grid-2" style={{ gap: '16px', marginBottom: '24px' }}>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label className="form-label">Nombre</label>
-                      <input required type="text" name="nombreTutor" className="form-input" onChange={handleChange} />
+                      <input required type="text" name="nombreTutor" className="form-input" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" onChange={handleChange} />
                     </div>
                     <div className="form-group" style={{ marginBottom: 0 }}>
                       <label className="form-label">Apellido</label>
-                      <input required type="text" name="apellidoTutor" className="form-input" onChange={handleChange} />
+                      <input required type="text" name="apellidoTutor" className="form-input" pattern="[A-Za-zÀ-ÿ\s]+" title="Solo se permiten letras y espacios" onChange={handleChange} />
                     </div>
                   </div>
                   <div className="form-group">

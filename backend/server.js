@@ -245,6 +245,11 @@ app.delete('/api/users/:id', async (req, res) => {
   res.json({ message: 'User deleted' });
 });
 
+app.use(express.static(path.join(__dirname, '../dist')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
