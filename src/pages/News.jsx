@@ -24,7 +24,7 @@ export default function News() {
   const tagList = ['Todos', 'General', 'Primaria', 'Secundaria', 'Deportes', 'Eventos', 'Institucional'];
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/news')
+    fetch('/api/news')
       .then(res => res.json())
       .then(data => setItems(data))
       .catch(err => console.error(err));
@@ -54,7 +54,7 @@ export default function News() {
       formData.append('imagen', selectedFile);
     }
 
-    fetch('http://localhost:3001/api/news', {
+    fetch('/api/news', {
       method: 'POST',
       body: formData
     })
@@ -71,7 +71,7 @@ export default function News() {
 
   const handleDelete = (id) => {
     if (window.confirm('¿Seguro que deseas eliminar esta noticia?')) {
-      fetch(`http://localhost:3001/api/news/${id}`, { method: 'DELETE' })
+      fetch(`/api/news/${id}`, { method: 'DELETE' })
         .then(() => setItems(items.filter(item => item.id !== id)));
     }
   };
@@ -86,7 +86,7 @@ export default function News() {
       tag: item.tag || 'General'
     });
     setEditFile(null);
-    setEditPreview(item.imagen ? `http://localhost:3001${item.imagen}` : null);
+    setEditPreview(item.imagen ? `${item.imagen}` : null);
   };
 
   const handleEditFileChange = (e) => {
@@ -112,7 +112,7 @@ export default function News() {
       formData.append('imagen', editFile);
     }
 
-    fetch(`http://localhost:3001/api/news/${editingPost.id}`, {
+    fetch(`/api/news/${editingPost.id}`, {
       method: 'PUT',
       body: formData
     })
@@ -278,7 +278,7 @@ export default function News() {
                     <Link to={`/noticias/${item.id}`} style={{ display: 'block' }}>
                       {item.imagen ? (
                         <img
-                          src={`http://localhost:3001${item.imagen}`}
+                          src={`${item.imagen}`}
                           alt={item.title}
                           style={{ height: '180px', width: '100%', objectFit: 'cover' }}
                         />

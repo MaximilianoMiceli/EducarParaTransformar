@@ -12,7 +12,7 @@ export default function UserManagement() {
   }, []);
 
   const fetchUsers = () => {
-    fetch('http://localhost:3001/api/users')
+    fetch('/api/users')
       .then(res => res.json())
       .then(data => {
         // Docentes solo ven alumnos y padres
@@ -27,7 +27,7 @@ export default function UserManagement() {
 
   const handleCreateUser = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3001/api/users', {
+    fetch('/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newUser)
@@ -48,7 +48,7 @@ export default function UserManagement() {
   };
 
   const toggleStatus = (id, currentStatus) => {
-    fetch(`http://localhost:3001/api/users/${id}`, {
+    fetch(`/api/users/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ activo: !currentStatus })
@@ -57,7 +57,7 @@ export default function UserManagement() {
 
   const handleDelete = (id) => {
     if (window.confirm('¿Seguro que deseas eliminar este usuario?')) {
-      fetch(`http://localhost:3001/api/users/${id}`, { method: 'DELETE' })
+      fetch(`/api/users/${id}`, { method: 'DELETE' })
         .then(() => fetchUsers());
     }
   };
@@ -65,7 +65,7 @@ export default function UserManagement() {
   const handleChangePassword = (id, nombre) => {
     const newPassword = window.prompt(`Introduce la nueva contraseña para el usuario ${nombre}:`);
     if (newPassword) {
-      fetch(`http://localhost:3001/api/users/${id}`, {
+      fetch(`/api/users/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: newPassword })

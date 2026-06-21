@@ -9,14 +9,14 @@ export default function Home() {
   const [activeEvent, setActiveEvent] = useState(null); // Estado para el modal del evento activo
 
   useEffect(() => { //Se cargan las noticias desde el servidor
-    fetch('http://localhost:3001/api/news')
+    fetch('/api/news')
       .then(res => res.json())
       .then(data => setNoticias(data))
       .catch(err => console.error('Error al traer noticias:', err));
   }, []);
 
   useEffect(() => { // Se cargan los eventos desde el servidor
-    fetch('http://localhost:3001/api/events')
+    fetch('/api/events')
       .then(res => res.json())
       .then(data => setEventos(data))
       .catch(err => console.error('Error al traer eventos:', err));
@@ -75,7 +75,7 @@ export default function Home() {
                 <Link to={`/noticias/${item.id}`} style={{ display: 'block' }}>
                   {item.imagen ? (
                     <img
-                      src={`http://localhost:3001${item.imagen}`}
+                      src={`${item.imagen}`}
                       alt={item.title}
                       style={{ height: '200px', width: '100%', objectFit: 'cover' }}
                     />

@@ -21,7 +21,7 @@ export default function Registration() {
     setLoading(true);
 
     // USAMOS EL MISMO PUERTO QUE EN JOBS (3001)
-    fetch('http://localhost:3001/api/inscripciones', {
+    fetch('/api/inscripciones', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)

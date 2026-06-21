@@ -10,7 +10,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (user && (user.role === 'docente' || user.role === 'autoridad')) {
-      fetch('http://localhost:3001/api/jobs')
+      fetch('/api/jobs')
         .then(res => res.json())
         .then(data => setJobs(data))
         .catch(err => console.error(err));
@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [inscripciones, setInscripciones] = useState([]);
 
 useEffect(() => {
-  fetch('http://localhost:3001/api/inscripciones')
+  fetch('/api/inscripciones')
     .then(res => res.json())
     .then(data => setInscripciones(data))
     .catch(err => console.error("Error al cargar inscripciones:", err));

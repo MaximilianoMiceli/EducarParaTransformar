@@ -18,7 +18,7 @@ export default function Jobs() {
     e.preventDefault();
     setLoading(true);
     
-    fetch('http://localhost:3001/api/jobs', {
+    fetch('/api/jobs', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)

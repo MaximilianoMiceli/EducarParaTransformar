@@ -20,7 +20,7 @@ export default function EventManager() {
   }, []);
 
   const fetchEvents = () => {
-    fetch('http://localhost:3001/api/events')
+    fetch('/api/events')
       .then(res => res.json())
       .then(data => setEventos(data))
       .catch(err => console.error('Error al cargar eventos:', err));
@@ -39,7 +39,7 @@ export default function EventManager() {
       return;
     }
 
-    fetch('http://localhost:3001/api/events', {
+    fetch('/api/events', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newEvent)
@@ -69,7 +69,7 @@ export default function EventManager() {
 
   const handleDeleteEvent = (id) => {
     if (window.confirm('¿Seguro que deseas eliminar este evento?')) {
-      fetch(`http://localhost:3001/api/events/${id}`, { method: 'DELETE' })
+      fetch(`/api/events/${id}`, { method: 'DELETE' })
         .then(res => {
           if (!res.ok) throw new Error('Error al eliminar');
           fetchEvents();

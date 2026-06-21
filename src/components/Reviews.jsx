@@ -9,7 +9,7 @@ export default function Reviews() {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/reviews')
+    fetch('/api/reviews')
       .then(res => res.json())
       .then(data => setReviews(data))
       .catch(err => console.error(err));
@@ -19,7 +19,7 @@ export default function Reviews() {
     e.preventDefault();
     if (newReview.author && newReview.text) {
       const reviewData = { author: newReview.author, text: newReview.text, date: 'Justo ahora' };
-      fetch('http://localhost:3001/api/reviews', {
+      fetch('/api/reviews', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(reviewData)
@@ -33,7 +33,7 @@ export default function Reviews() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3001/api/reviews/${id}`, { method: 'DELETE' })
+    fetch(`/api/reviews/${id}`, { method: 'DELETE' })
       .then(() => {
         setReviews(reviews.filter(review => review.id !== id));
       });

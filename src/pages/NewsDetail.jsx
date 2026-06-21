@@ -14,7 +14,7 @@ export default function NewsDetail() {
     setError(false);
 
     // Fetch the specific news article
-    fetch(`http://localhost:3001/api/news/${id}`)
+    fetch(`/api/news/${id}`)
       .then(res => {
         if (!res.ok) {
           throw new Error('Noticia no encontrada');
@@ -32,7 +32,7 @@ export default function NewsDetail() {
       });
 
     // Fetch recent news for the sidebar
-    fetch('http://localhost:3001/api/news')
+    fetch('/api/news')
       .then(res => res.json())
       .then(data => {
         // Filter out current post and take top 3
@@ -107,7 +107,7 @@ export default function NewsDetail() {
             <div className="card" style={{ boxShadow: 'var(--shadow-md)', border: 'none' }}>
               {post.imagen ? (
                 <img
-                  src={`http://localhost:3001${post.imagen}`}
+                  src={`${post.imagen}`}
                   alt={post.title}
                   style={{ width: '100%', maxHeight: '450px', objectFit: 'cover' }}
                 />
@@ -141,7 +141,7 @@ export default function NewsDetail() {
                       <div style={{ display: 'flex', gap: '12px', padding: '12px' }}>
                         {item.imagen ? (
                           <img
-                            src={`http://localhost:3001${item.imagen}`}
+                            src={`${item.imagen}`}
                             alt={item.title}
                             style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: 'var(--radius-md)' }}
                           />
