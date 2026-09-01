@@ -33,3 +33,11 @@ Educar para Transformar es una aplicaciÃ³n web orientada a la gestiÃ³n de notici
 - SQLite
 - React Router DOM
 - Lucide React
+## Estructura del proyecto
+
+- src/pages/: pantallas principales de la aplicación
+- src/components/: componentes reutilizables
+- src/context/: contexto de autenticación
+- backend/: servidor y lógica de API
+- database/: esquema y datos de la base de datos
+
