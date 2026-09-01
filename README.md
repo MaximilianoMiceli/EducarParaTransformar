@@ -1,22 +1,35 @@
-# React + Vite
+# Educar para Transformar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción breve
+Educar para Transformar es una aplicación web orientada a la gestión de noticias, eventos y contenidos institucionales. La plataforma permite visualizar información relevante para la comunidad educativa, publicar novedades, administrar eventos y mantener una presencia organizada de la institución.
 
-Currently, two official plugins are available:
+## Cómo ejecutar el programa
+1. Clonar el repositorio.
+2. Abrir la carpeta del proyecto en la terminal.
+3. Instalar las dependencias:
+   npm install
+4. Iniciar la aplicación:
+   npm run dev
+5. La aplicación levantará tanto el backend como el frontend de forma simultánea.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funcionalidades principales
+- Visualización de noticias y novedades.
+- Filtros por categoría o tema.
+- Publicación, edición y eliminación de noticias.
+- Gestión de eventos y actividades institucionales.
+- Navegación con rutas para páginas principales y contenido relevante.
+- Panel de administración para usuarios con roles autorizados.
 
-## React Compiler
+## Integrantes
+- Backend: Miceli, Maximiliano
+- Diseño y Frontend: Rodriguez, Augusto
+- Base de Datos: Blanco, Horacio
+- Gestión y QA: Esquivel, Marcelo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-## 👥 Equipo de Desarrollo
-* **Backend:** Miceli, Maximiliano
-* **Diseño y Frontend:** Rodriguez, Augusto
-* **Base de Datos:** Blanco, Horacio
-* **Gestión y QA:** Esquivel, Marcelo
+## Tecnologías utilizadas
+- React
+- Vite
+- Express
+- SQLite
+- React Router DOM
+- Lucide React
