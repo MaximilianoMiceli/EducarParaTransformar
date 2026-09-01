@@ -1,22 +1,43 @@
-# React + Vite
+# Educar para Transformar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripci贸n breve
+Educar para Transformar es una aplicaci贸n web orientada a la gesti贸n de noticias, eventos y contenidos institucionales. La plataforma permite visualizar informaci贸n relevante para la comunidad educativa, publicar novedades, administrar eventos y mantener una presencia organizada de la instituci贸n.
 
-Currently, two official plugins are available:
+## C贸mo ejecutar el programa
+1. Clonar el repositorio.
+2. Abrir la carpeta del proyecto en la terminal.
+3. Instalar las dependencias:
+   npm install
+4. Iniciar la aplicaci贸n:
+   npm run dev
+5. La aplicaci贸n levantar谩 tanto el backend como el frontend de forma simult谩nea.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funcionalidades principales
+- Visualizaci贸n de noticias y novedades.
+- Filtros por categor铆a o tema.
+- Publicaci贸n, edici贸n y eliminaci贸n de noticias.
+- Gesti贸n de eventos y actividades institucionales.
+- Navegaci贸n con rutas para p谩ginas principales y contenido relevante.
+- Panel de administraci贸n para usuarios con roles autorizados.
 
-## React Compiler
+## Integrantes
+- Backend: Miceli, Maximiliano
+- Dise帽o y Frontend: Rodriguez, Augusto
+- Base de Datos: Blanco, Horacio
+- Gesti贸n y QA: Esquivel, Marcelo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tecnolog铆as utilizadas
+- React
+- Vite
+- Express
+- SQLite
+- React Router DOM
+- Lucide React
+## Estructura del proyecto
 
-## Expanding the ESLint configuration
+- src/pages/: pantallas principales de la aplicaci髇
+- src/components/: componentes reutilizables
+- src/context/: contexto de autenticaci髇
+- backend/: servidor y l骻ica de API
+- database/: esquema y datos de la base de datos
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-## 馃懃 Equipo de Desarrollo
-* **Backend:** Miceli, Maximiliano
-* **Dise帽o y Frontend:** Rodriguez, Augusto
-* **Base de Datos:** Blanco, Horacio
-* **Gesti贸n y QA:** Esquivel, Marcelo
