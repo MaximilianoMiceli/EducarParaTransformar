@@ -2,6 +2,19 @@ import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { MapPin, Phone, Mail, LogOut, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+function BrandLogo({ compact = false }) {
+  return (
+    <Link to="/" className={`logo ${compact ? 'logo-compact' : ''}`}>
+      <img src="/favicon.png" alt="Logo" className="logo-image" />
+      <span className="brand-text">
+        <span className="brand-word brand-word-blue">Educar</span>
+        <span className="brand-word brand-word-pink">para</span>
+        <span className="brand-word brand-word-yellow">Transformar</span>
+      </span>
+    </Link>
+  );
+}
+
 export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,14 +39,7 @@ export default function Layout() {
     <div className="app-container">
       <nav className="navbar">
         <div className="container navbar-container">
-          <Link to="/" className="logo" style={{ marginLeft: '-35px' }}>
-            <img src="/favicon.png" alt="Logo" style={{ width: '56px', height: '56px', objectFit: 'contain', backgroundColor: 'white', borderRadius: '50%', padding: '4px' }} />
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', textShadow: '1px 1px 2px #000' }}>
-              <span style={{ color: '#3B82F6' }}>Educar</span>
-              <span style={{ color: '#EC4899', fontWeight: '600' }}>para</span>
-              <span style={{ color: '#FBBF24' }}>Transformar</span>
-            </span>
-          </Link>
+          <BrandLogo />
           <div className="nav-links">
             {links.map((link) => (
               <Link 
@@ -45,16 +51,16 @@ export default function Layout() {
               </Link>
             ))}
             {user ? (
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                <Link to="/dashboard" className="btn" style={{ backgroundColor: '#E2E8F0', padding: '8px 16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div className="nav-actions">
+                <Link to="/dashboard" className="btn btn-dashboard">
                   <LayoutDashboard size={18} /> Panel
                 </Link>
-                <button onClick={handleLogout} className="btn" style={{ backgroundColor: 'transparent', color: 'var(--color-accent-red)', padding: '8px', border: '1px solid var(--color-accent-red)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button onClick={handleLogout} className="btn btn-logout">
                   <LogOut size={18} /> Salir
                 </button>
               </div>
             ) : (
-              <Link to="/acceso" className="btn btn-primary" style={{ padding: '8px 16px' }}>
+              <Link to="/acceso" className="btn btn-primary btn-access">
                 Acceso
               </Link>
             )}
@@ -62,7 +68,7 @@ export default function Layout() {
         </div>
       </nav>
 
-      <main style={{ minHeight: '80vh' }}>
+      <main className="main-content">
         <Outlet />
       </main>
 
@@ -70,28 +76,23 @@ export default function Layout() {
         <div className="container">
           <div className="footer-grid">
             <div className="footer-col">
-              <div className="logo" style={{ marginBottom: '16px', marginLeft: '-30px' }}>
-                <img src="/favicon.png" alt="Logo" style={{ width: '56px', height: '56px', objectFit: 'contain', backgroundColor: 'white', borderRadius: '50%', padding: '4px' }} />
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', textShadow: '1px 1px 2px #000' }}>
-                  <span style={{ color: '#3B82F6' }}>Educar</span>
-                  <span style={{ color: '#EC4899', fontWeight: '600' }}>para</span>
-                  <span style={{ color: '#FBBF24' }}>Transformar</span>
-                </span>
+              <div className="footer-brand">
+                <BrandLogo />
               </div>
-              <p style={{ color: 'rgba(255,255,255,0.8)' }}>
+              <p className="footer-intro">
                 Inspiramos, desafiamos y empoderamos a todos nuestros alumnos para que alcancen su máximo potencial.
               </p>
             </div>
             <div className="footer-col">
               <h3>Contacto</h3>
               <ul className="footer-links">
-                <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <li className="footer-item">
                   <MapPin size={18} /> Av. 1234, Resistencia Chaco
                 </li>
-                <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <li className="footer-item">
                   <Phone size={18} /> +54 3624 1234-5678
                 </li>
-                <li style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <li className="footer-item">
                   <Mail size={18} /> info@educartransformar.edu
                 </li>
               </ul>
